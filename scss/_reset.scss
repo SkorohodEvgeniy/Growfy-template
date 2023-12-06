@@ -1,0 +1,50 @@
+/*Reset*/
+
+*,
+*::after,
+*::before {
+   padding: 0;
+   margin: 0;
+   border: 0;
+   -webkit-box-sizing: border-box;
+   box-sizing: border-box;
+}
+
+ul,
+li,
+ol {
+   list-style: none;
+}
+
+img {
+   max-width: 100%;
+   vertical-align: top;
+}
+
+a {
+   text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+   font-weight: inherit;
+   font-size: inherit;
+}
+
+.wrapper {
+   min-height: 100%;
+   /*Magic*/
+   display: flex;
+   /*Magic*/
+   flex-direction: column;
+   /*Magic*/
+}
+
+.main {
+   flex: 1 1 auto;
+   /*Magic*/
+}

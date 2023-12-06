@@ -1,0 +1,140 @@
+/* Tabs */
+.content {
+    margin-left: 50px;
+    max-width: 800px;
+}
+
+.tabs {
+    margin-bottom: 50px;
+
+    &__items {
+        display: flex;
+    }
+
+    &__item {
+        flex: 0 1 33.333%;
+        height: 50px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        text-transform: uppercase;
+        color: #000;
+        text-decoration: none;
+    }
+
+    &__item span {
+        position: relative;
+        z-index: 2;
+    }
+
+    &__block {
+        padding: 20px;
+        font-size: 18px;
+        line-height: 24px;
+        color: #fff;
+        display: none;
+        position: relative;
+    }
+
+    &__block::before {
+        content: "";
+        height: 50px;
+        width: 33.333%;
+        position: absolute;
+        top: -50px;
+    }
+
+    &__block:nth-child(1) {
+        background-color: #77608d;
+    }
+
+    &__block:nth-child(1)::before {
+        background-color: #77608d;
+        left: 0;
+    }
+
+    &__block:nth-child(2) {
+        background-color: #794f45;
+    }
+
+    &__block:nth-child(2)::before {
+        background-color: #794f45;
+        left: 33.333%;
+    }
+
+    &__block:nth-child(3) {
+        background-color: burlywood;
+    }
+
+    &__block:nth-child(3)::before {
+        background-color: burlywood;
+        right: 0;
+    }
+
+    &__block:target {
+        display: block;
+    }
+}
+
+@media (max-width: 600px) {
+    .tabs__item span {
+        display: block;
+        width: 100px;
+        padding: 0 5px;
+        white-space: nowrap;
+        text-align: center;
+        overflow: hidden;
+        font-size: 14px;
+        text-overflow: ellipsis;
+    }
+}
+
+/* Tabs END */
+
+
+/*--- Tabs HTML template
+<!--Tabs-->
+
+        <div class="content">
+          <div class="tabs">
+            <nav class="tabs__items">
+              <a href="#tab_01" class="tabs__item"
+                ><span>Первая вкладка</span></a
+              >
+              <a href="#tab_02" class="tabs__item"
+                ><span>Вторая вкладка</span></a
+              >
+              <a href="#tab_03" class="tabs__item"
+                ><span>Третья вкладка</span></a
+              >
+            </nav>
+            <div class="tabs__body">
+              <div id="tab_01" class="tabs__block">
+                Первая вкладка. Lorem ipsum dolor sit amet consectetur
+                adipisicing elit. Consequatur nisi eligendi at enim, minima
+                commodi, maiores libero atque tempora suscipit alias assumenda.
+                Recusandae rerum fugiat delectus dolore eaque natus aspernatur.
+              </div>
+              <div id="tab_02" class="tabs__block">
+                Вторая вкладка. Lorem ipsum dolor sit amet consectetur
+                adipisicing elit. Consequatur inventore itaque eligendi vel ad,
+                porro quas nam quam error architecto et numquam maiores? Quo
+                atque velit natus earum necessitatibus minus?
+              </div>
+              <div id="tab_03" class="tabs__block">
+                Третья вкладка. Lorem ipsum dolor sit amet consectetur
+                adipisicing elit. Doloribus corrupti architecto id laboriosam
+                animi quidem mollitia porro nihil atque commodi? Harum id quasi
+                ipsa delectus. Obcaecati nesciunt eaque numquam aspernatur!
+              </div>
+            </div>
+          </div>
+          <div class="text">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro
+            explicabo, impedit culpa aliquam a fugit corrupti atque excepturi
+            consequatur veniam sapiente ut maiores eligendi tempore in dolores
+            suscipit. Suscipit, quo!
+          </div>
+        </div>
+
+---*/

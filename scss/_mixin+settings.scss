@@ -1,0 +1,94 @@
+@use 'sass:math';
+
+/*--- Settings basic template ---*/
+$lineHeight: 150%;
+$fontFamily: 'Poppins', sans-serif;
+$fontWeight: 400;
+$fontStyle: normal;
+$fontSize: 1rem;
+$backgroundColor: #0D0D11;
+$color: #9c9c9c;
+
+/*--- !important - whithout px ---*/
+$maxWidth: 1920;
+$container: 1310;
+
+/*---------------------------------------------------------------------------------------*/
+/***------------------------------ Start MIXIN templates ------------------------------***/
+/*---------------------------------------------------------------------------------------*/
+
+/*--- Mixin * @include adaptive-fonts(40, 24); * ---*/
+@mixin adaptive-font($fontPcSize, $fontMobSize) {
+    $addSize: $fontPcSize - $fontMobSize;
+    $addMobSize: $addSize + $addSize * 0.7;
+
+    @media screen and (max-width:767px) {
+        font-size: calc(#{$fontMobSize + px} + #{$addMobSize} * ((100vw - 320px) / #{$container}));
+    }
+
+    @media screen and (min-width:767px) {
+        font-size: calc(#{$fontMobSize + px} + #{$addSize} * (100vw / #{$container}));
+    }
+}
+
+/*--- Mixin * @nclude adaptive-value("padding", 40, 15, 0); * ---*/
+@mixin adaptive-value($property, $startSize, $minSize, $type: 0) {
+    $addSize: $startSize - $minSize;
+
+    @if $type==1 {
+        //Тільки якщо меньше контейнеру
+        #{$property}: $startSize + px;
+
+        @media (max-width: #{$container + px}) {
+            #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$container - 320}));
+        }
+    }
+
+    @else if $type==2 {
+        //Тільки якщо більше контейнеру
+        #{$property}: $startSize + px;
+
+        @media(min-width: #{$container + px}) {
+            #{$property}: calc(#{$minSize + px} + #{$addSize} * (100vw - 320px) / #{$maxWidth - 320});
+        }
+    }
+
+    @else {
+        //Завжди
+        #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+    }
+}
+
+/*--- Mixin Media Query * @include mq{} *---*/
+$breakpoints: (
+    "phone": 400px,
+    "tablet": 768px,
+    "desktop": 1024px,
+    "desktop-wide": $container + px
+);
+
+@mixin mq($width: tablet, $type: max) {
+    @if map_has_key($breakpoints, $width) {
+        $width: map_get($breakpoints, $width);
+
+        @if $type==max {
+            $width: $width - 1px;
+        }
+
+        @media only screen and (#{$type}-width: $width) {
+            @content;
+        }
+    }
+
+    @else {
+        @media only screen and (#{$type}-width: $width + px) {
+            @content;
+        }
+    }
+}
+
+/*---  Function px -> rem  ---*/
+/*-  Print  width:toRem(20); -*/
+@function toRem($pxValue) {
+    @return math.div($pxValue, 16) * 1rem;
+}
